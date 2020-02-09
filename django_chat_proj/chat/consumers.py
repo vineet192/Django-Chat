@@ -9,7 +9,7 @@ User = get_user_model()
 class ChatConsumer(WebsocketConsumer):
 
     
-    def new_messages(self, data):
+    def new_message(self, data):
         author = data['from']
         author_user = User.objects.filter(username=author)[0]
         message = Message.objects.create(
@@ -44,7 +44,7 @@ class ChatConsumer(WebsocketConsumer):
 
     commands = {
         'fetch_messages':fetch_messages,
-        'new_messages':new_messages,
+        'new_message':new_message,
     }
 
     def connect(self):
